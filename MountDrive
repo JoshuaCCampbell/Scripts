@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if [ "$1" = "mount" ]; then
+    sudo mount /dev/sdc1 /mnt/externaldrive -t ntfs-3g
+    exit 0
+elif [ "$1" = unmount ]; then
+    umount /mnt/externaldrive
+    exit 0
+else
+    echo "Undefined Error"
+    exit 1
+fi

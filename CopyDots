@@ -1,0 +1,48 @@
+#!/bin/sh
+
+# CopyDots
+# Joshua C. Campbell
+# Copy dot files to git dir with optional push
+
+# Copy files
+echo "Copying .config"
+cp -r $HOME/.config $HOME/Scripts/Dot-Files
+echo "Copying .fehbg"
+cp $HOME/.fehbg $HOME/Scripts/Dot-Files
+echo "Copying .vimrc"
+cp $HOME/.vimrc $HOME/Scripts/Dot-Files
+echo "Copying .xinitrc"
+cp $HOME/.xinitrc $HOME/Scripts/Dot-Files
+echo "Copying .Xresources"
+cp $HOME/.Xresources $HOME/Scripts/Dot-Files
+echo "Copying .zprofile"
+cp $HOME/.zprofile $HOME/Scripts/Dot-Files
+echo "Copying .zshrc"
+cp $HOME/.zshrc $HOME/Scripts/Dot-Files
+echo "Copying Complete"
+
+# Push to git
+echo "Would you like to push the changes to Github? (y/N)"
+read push
+
+if [ "$push" == "y" ] || [ "$push" == "Y" ]; then
+    cd $HOME/Scripts/Dot-Files
+    git add --all
+    git commit -m "$(date)"
+    git push origin master
+
+    echo "$(date) [Info] Pushing to git" >> $HOME/Scripts/Logs/CopyDots.log
+    echo "Exiting script"
+    exit 1
+elif [ "$push" == "" ] || [ "$push" == "n" ] || [ "$push" == "N" ]; then
+    echo "Exiting script"
+    echo "$(date) [Info] Skipped git push" >> $HOME/Scripts/Logs/CopyDots.log
+    exit 1
+else
+    echo "$(date) [Error] Invalid choice: '$push' for git push" >> $HOME/Scripts/Logs/CopyDots.log
+
+    echo "Invalid input. Saving to log for future analysis"
+    echo "Exiting script"
+    exit 0
+fi
+
