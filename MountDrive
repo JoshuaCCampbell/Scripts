@@ -1,12 +1,18 @@
 #!/bin/sh
 
-if [ "$1" = "mount" ]; then
+if [ "$1" == "mount" ]; then
     sudo mount /dev/sdc1 /mnt/externaldrive -t ntfs-3g
+
+    echo "$(date) [Info] Mounting drive" >> $HOME/Scripts/Logs/MountDrive.log
     exit 0
-elif [ "$1" = unmount ]; then
-    umount /mnt/externaldrive
+elif [ "$1" == "unmount" ]; then
+    sudo umount /mnt/externaldrive
+
+    echo "$(date) [Info] Unmounting drive" >> $HOME/Scripts/Logs/MountDrive.log
     exit 0
 else
-    echo "Undefined Error"
+    echo "$(date) [Error] Invalid parameter: '$1'" >> $HOME/Scripts/Logs/MountDrive.log
+    
+    echo "Invalid parameter. Saving to log for future analysis"
     exit 1
 fi
