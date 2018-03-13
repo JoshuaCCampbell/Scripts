@@ -4,6 +4,13 @@
 # Joshua C. Campbell
 # Copy dot files to git dir with optional push
 
+if [ "$1" == "" ]; then
+    echo "No branch selected. Exiting."
+    exit 0
+fi
+
+branch = $1
+
 # Copy files
 echo "Copying .config"
 cp -r $HOME/.config $HOME/Scripts/Dot-Files
@@ -29,7 +36,7 @@ if [ "$push" == "y" ] || [ "$push" == "Y" ]; then
     cd $HOME/Scripts/Dot-Files
     git add --all
     git commit -m "$(date)"
-    git push origin master
+    git push origin $branch
 
     echo "$(date) [Info] Pushing to git" >> $HOME/Scripts/Logs/CopyDots.log
     echo "Exiting script"
