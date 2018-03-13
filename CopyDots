@@ -34,8 +34,10 @@ read push
 
 if [ "$push" == "y" ] || [ "$push" == "Y" ]; then
     cd $HOME/Scripts/Dot-Files
+    git checkout $branch
     git add --all
     git commit -m "$(date)"
+    git push origin $branch
 
     echo "$(date) [Info] Pushing to git" >> $HOME/Scripts/Logs/CopyDots.log
     echo "Exiting script"
