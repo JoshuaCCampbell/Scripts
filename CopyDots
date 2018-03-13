@@ -36,7 +36,7 @@ if [ "$push" == "y" ] || [ "$push" == "Y" ]; then
     cd $HOME/Scripts/Dot-Files
     git checkout $branch
     echo git branch -a
-    sleep 2
+    sleep 1
     git add --all
     git commit -m "$(date)"
     git push origin $branch
