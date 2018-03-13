@@ -35,6 +35,7 @@ read push
 if [ "$push" == "y" ] || [ "$push" == "Y" ]; then
     cd $HOME/Scripts/Dot-Files
     git checkout $branch
+    echo git branch -a
     git add --all
     git commit -m "$(date)"
     git push origin $branch
