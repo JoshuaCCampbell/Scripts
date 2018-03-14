@@ -4,28 +4,39 @@
 # Joshua C. Campbell
 # Copy dot files to git dir with optional push
 
-if [ "$1" == "" ]; then
-    echo "No branch selected. Exiting."
-    exit 0
+# TODO: Hard clean up. Bring in some functions 
+
+# Directories to copy
+declare -a dirs=(".config" ".vimrc" ".xinitrc" ".Xresources" ".zprofile" ".zshrc")
+
+# Start main script
+####################################################################################
+
+copy_directory()
+{
+    echo "Copying $1"
+    cp -r "$HOME/$1" "$HOME/Scripts/Dot-Files"
+}
+
+# Get enviroment from the user
+if [ "$1" != "" ]; then
+    branch="$1"
 fi
 
-branch = $1
+# Ask for input until not blank
+# TODO: Implement branch checking
+while [ "$branch" == "" ]
+do
+    echo "Choose an enviroment"
+    read branch
+done
 
-# Copy files
-echo "Copying .config"
-cp -r $HOME/.config $HOME/Scripts/Dot-Files
-echo "Copying .fehbg"
-cp $HOME/.fehbg $HOME/Scripts/Dot-Files
-echo "Copying .vimrc"
-cp $HOME/.vimrc $HOME/Scripts/Dot-Files
-echo "Copying .xinitrc"
-cp $HOME/.xinitrc $HOME/Scripts/Dot-Files
-echo "Copying .Xresources"
-cp $HOME/.Xresources $HOME/Scripts/Dot-Files
-echo "Copying .zprofile"
-cp $HOME/.zprofile $HOME/Scripts/Dot-Files
-echo "Copying .zshrc"
-cp $HOME/.zshrc $HOME/Scripts/Dot-Files
+# Copy each directory listed in dirs array
+for dir in "${dirs[@]}"
+do
+    copy_directory $dir
+done
+
 echo "Copying Complete"
 
 # Push to git
@@ -35,10 +46,10 @@ read push
 if [ "$push" == "y" ] || [ "$push" == "Y" ]; then
     cd $HOME/Scripts/Dot-Files
     git checkout $branch
-    echo git branch -a
-    sleep 1
     git add --all
     git commit -m "$(date)"
+    echo "Current branch:"
+    git branch -a | grep "*"
     git push origin $branch
 
     echo "$(date) [Info] Pushing to git" >> $HOME/Scripts/Logs/CopyDots.log
@@ -55,4 +66,3 @@ else
     echo "Exiting script"
     exit 0
 fi
-
