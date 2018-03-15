@@ -7,7 +7,7 @@
 # TODO: Hard clean up. Bring in some functions 
 
 # Directories to copy
-declare -a dirs=(".config" ".vimrc" ".xinitrc" ".Xresources" ".zprofile" ".zshrc")
+declare -a dirs=(".config/i3" ".config/polybar" ".vimrc" ".xinitrc" ".Xresources" ".zprofile" ".zshrc")
 
 # Start main script
 ####################################################################################
@@ -45,11 +45,8 @@ read push
 
 if [ "$push" == "y" ] || [ "$push" == "Y" ]; then
     cd $HOME/Scripts/Dot-Files
-    git checkout $branch
     git add --all
     git commit -m "$(date)"
-    echo "Current branch:"
-    git branch -a | grep "*"
     git push origin $branch
 
     echo "$(date) [Info] Pushing to git" >> $HOME/Scripts/Logs/CopyDots.log
