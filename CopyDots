@@ -7,7 +7,7 @@
 # TODO: Hard clean up. Bring in some functions 
 
 # Directories to copy
-declare -a dirs=(".config/i3" ".config/polybar" ".vimrc" ".xinitrc" ".Xresources" ".zprofile" ".zshrc")
+declare -a dirs=(".config/bspwm" ".config/sxhkd" ".config/neofetch" ".config/polybar" ".vimrc" ".xinitrc" ".Xresources" ".zprofile" ".zshrc")
 
 # Start main script
 ####################################################################################
