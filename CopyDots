@@ -4,10 +4,14 @@
 # Joshua C. Campbell
 # Copy dot files to git dir with optional push
 
-# TODO: Hard clean up. Bring in some functions 
 
 # Directories to copy
-declare -a dirs=(".config/bspwm" ".config/sxhkd" ".config/neofetch" ".config/polybar" ".vimrc" ".xinitrc" ".Xresources" ".zprofile" ".zshrc")
+if [ "$1" = "bspwm" ]; then
+    declare -a dirs=(".config/bspwm" ".config/sxhkd" ".config/neofetch" ".config/polybar" ".vimrc" ".xinitrc" ".Xresources" ".zprofile" ".zshrc")
+elif [ "$1" = "i3" ]; then
+    declare -a dirs=(".config/i3" ".config/polybar" ".vimrc" ".xinitrc" ".Xresources" ".zprofile" ".zshrc")
+fi
+
 
 # Start main script
 ####################################################################################
