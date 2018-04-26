@@ -1,0 +1,4 @@
+#!/bin/bash
+
+synergy-core --server --run-as-uid 1000 --debug DEBUG --name arch --enable-drag-drop --profile-dir /var/lib/synergy --log /var/log/synergy/synergy-core.log -c /etc/synergy.conf --address :24800
+
