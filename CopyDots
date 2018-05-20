@@ -23,6 +23,8 @@ if [ "$branch" = "bspwm" ]; then
     declare -a dirs=(".config/bspwm" ".config/sxhkd" ".config/neofetch" ".config/polybar" ".vimrc" ".xinitrc" ".Xresources" ".zprofile" ".zshrc")
 elif [ "$branch" = "i3" ]; then
     declare -a dirs=(".config/i3" ".config/polybar" ".vimrc" ".xinitrc" ".Xresources" ".zprofile" ".zshrc")
+elif [ "$branch" = "i3-gentoo" ]; then
+    declare -a dirs=(".config/i3" ".config/polybar" ".vimrc" ".xinitrc" ".Xresources" ".zprofile" ".zshrc" ".config/neofetch")
 else
     (echo "Invalid branch." >&2)
     exit 1
