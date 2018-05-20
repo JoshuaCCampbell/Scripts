@@ -1,5 +1,0 @@
-#!/bin/env bash
-
-sudo emerge -auvDN world #  ask, update, verbose, deep, newuse
-sudo emerge -a --depclean # Clean deps
-sudo revdep-rebuild -i #    Failsafe
